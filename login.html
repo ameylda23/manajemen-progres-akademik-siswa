@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MyClassProgress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Header -->
+            <div class="login-header">
+                <h1>MyClassProgress</h1>
+                <p>Masuk ke akun Anda</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm">
+                <!-- Role Selection -->
+                <div class="role-selector">
+                    <label class="role-option" id="roleSiswa">
+                        <input type="radio" name="role" value="siswa" checked>
+                        <div>👨‍🎓 Siswa</div>
+                    </label>
+                    <label class="role-option" id="roleGuru">
+                        <input type="radio" name="role" value="guru">
+                        <div>👨‍🏫 Guru</div>
+                    </label>
+                </div>
+
+                <!-- Email Input -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="Masukkan email Anda" required>
+                </div>
+
+                <!-- Password Input -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Masukkan password Anda" required>
+                </div>
+
+                <!-- Error Message -->
+                <div id="errorMessage" class="error-message">
+                    Email atau password salah!
+                </div>
+
+                <!-- Loading Spinner -->
+                <div id="loadingSpinner" class="loading-spinner">
+                    <div class="spinner"></div>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="login-btn" id="loginBtn">
+                    Masuk
+                </button>
+            </form>
+
+            <!-- Demo Accounts -->
+            <div class="demo-accounts">
+                <h4>Akun Demo:</h4>
+                <div class="demo-account">
+                    <strong>Siswa:</strong> andi@school.com / password123
+                </div>
+                <div class="demo-account">
+                    <strong>Guru:</strong> santi@school.com / password123
+                </div>
+            </div>
+
+            <!-- Register Link -->
+            <div class="register-link">
+                <p>Belum punya akun? <a href="#" id="registerLink">Daftar di sini</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

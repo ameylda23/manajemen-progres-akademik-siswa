@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Nilai - MyClassProgress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>MyClassProgress</h1>
+                <div class="user-info">
+                    <span id="userWelcome">Selamat datang, Guru!</span>
+                    <div class="user-menu">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="user-avatar">
+                        <span id="userName">Guru</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar">
+                <a href="guru.html" class="nav-link">Dashboard</a>
+                <a href="guru_nilai.html" class="nav-link active">Input Nilai</a>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h2>Input Nilai Siswa</h2>
+                <p>Berikan nilai untuk tugas yang telah dikumpulkan siswa</p>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="filterClass">Filter Kelas</label>
+                        <select id="filterClass" class="form-control">
+                            <option value="">Semua Kelas</option>
+                            <option value="12 IPA 1">12 IPA 1</option>
+                            <option value="12 IPA 2">12 IPA 2</option>
+                            <option value="12 IPS 1">12 IPS 1</option>
+                            <option value="12 IPS 2">12 IPS 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterSubject">Filter Mata Pelajaran</label>
+                        <select id="filterSubject" class="form-control">
+                            <option value="">Semua Mata Pelajaran</option>
+                            <option value="Matematika">Matematika</option>
+                            <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                            <option value="Bahasa Inggris">Bahasa Inggris</option>
+                            <option value="IPA">IPA</option>
+                            <option value="IPS">IPS</option>
+                            <option value="Sejarah">Sejarah</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterTask">Filter Tugas</label>
+                        <select id="filterTask" class="form-control">
+                            <option value="">Semua Tugas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterStatus">Filter Status</label>
+                        <select id="filterStatus" class="form-control">
+                            <option value="">Semua Status</option>
+                            <option value="belum">Belum Dinilai</option>
+                            <option value="sudah">Sudah Dinilai</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks to Grade -->
+            <section class="grading-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Daftar Tugas yang Perlu Dinilai</h3>
+                        <div class="card-actions">
+                            <button id="bulkGradeBtn" class="btn-secondary">Input Nilai Massal</button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="grading-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectAll">
+                                    </th>
+                                    <th>Siswa</th>
+                                    <th>Kelas</th>
+                                    <th>Tugas</th>
+                                    <th>Mata Pelajaran</th>
+                                    <th>Tanggal Kumpul</th>
+                                    <th>Status</th>
+                                    <th>Nilai</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gradingTableBody">
+                                <tr>
+                                    <td colspan="9" class="empty-state">
+                                        <p>Tidak ada tugas yang perlu dinilai</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grade Modal -->
+            <div id="gradeModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Input Nilai</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <form id="gradeForm">
+                        <div class="student-info">
+                            <h4 id="studentNameModal">Nama Siswa</h4>
+                            <p id="studentClassModal">Kelas: -</p>
+                            <p id="taskTitleModal">Tugas: -</p>
+                            <p id="taskSubjectModal">Mata Pelajaran: -</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gradeValue">Nilai (0-100)</label>
+                            <input type="number" id="gradeValue" class="form-control" min="0" max="100" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gradeNotes">Catatan untuk Siswa</label>
+                            <textarea id="gradeNotes" class="form-control" rows="4" placeholder="Berikan feedback atau catatan untuk siswa..."></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="cancelGrade">Batal</button>
+                            <button type="submit" class="btn-primary">Simpan Nilai</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bulk Grade Modal -->
+            <div id="bulkGradeModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Input Nilai Massal</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <form id="bulkGradeForm">
+                        <div class="form-group">
+                            <label for="bulkGradeValue">Nilai untuk Semua yang Dipilih (0-100)</label>
+                            <input type="number" id="bulkGradeValue" class="form-control" min="0" max="100" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bulkGradeNotes">Catatan Umum</label>
+                            <textarea id="bulkGradeNotes" class="form-control" rows="3" placeholder="Catatan yang akan diterapkan untuk semua siswa yang dipilih..."></textarea>
+                        </div>
+                        
+                        <div class="selected-count">
+                            <span id="selectedStudentsCount">0</span> siswa dipilih
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="cancelBulkGrade">Batal</button>
+                            <button type="submit" class="btn-primary">Simpan Semua Nilai</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recently Graded -->
+            <section class="recent-grades-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Nilai yang Baru Diberikan</h3>
+                    </div>
+                    <div class="recent-grades-list" id="recentGradesList">
+                        <div class="empty-state">
+                            <p>Belum ada nilai yang diberikan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="guru_nilai.js"></script>
+</body>
+</html>

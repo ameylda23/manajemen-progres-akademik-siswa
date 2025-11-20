@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Siswa - MyClassProgress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>MyClassProgress</h1>
+                <div class="user-info">
+                    <span id="userWelcome">Selamat datang!</span>
+                    <div class="user-menu">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="user-avatar">
+                        <span id="userName">Siswa</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="tugas.html" class="nav-link">Tugas</a>
+                <a href="nilai.html" class="nav-link">Nilai</a>
+                <a href="profile.html" class="nav-link active">Profil</a>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h2>Profil Siswa</h2>
+                <p>Kelola informasi profil dan akun Anda</p>
+            </div>
+
+            <!-- Profile Overview -->
+            <section class="profile-overview">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar-section">
+                            <div class="avatar-container">
+                                <img src="https://via.placeholder.com/120" alt="Profile Picture" id="profilePicture" class="profile-avatar">
+                                <button class="change-avatar-btn" id="changeAvatarBtn">Ubah Foto</button>
+                            </div>
+                            <div class="profile-basic-info">
+                                <h3 id="profileName">Nama Siswa</h3>
+                                <p class="student-id" id="profileStudentId">ID: -</p>
+                                <p class="student-class" id="profileClass">Kelas: -</p>
+                                <p class="student-email" id="profileEmail">Email: -</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Sections -->
+            <div class="profile-sections">
+                <!-- Personal Information -->
+                <section class="profile-section">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>Informasi Pribadi</h3>
+                            <button class="btn-secondary" id="editPersonalInfoBtn">Edit</button>
+                        </div>
+                        <form id="personalInfoForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="fullName">Nama Lengkap</label>
+                                    <input type="text" id="fullName" class="form-control" required disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control" required disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phoneNumber">Nomor Telepon</label>
+                                    <input type="tel" id="phoneNumber" class="form-control" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="birthDate">Tanggal Lahir</label>
+                                    <input type="date" id="birthDate" class="form-control" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Alamat</label>
+                                    <textarea id="address" class="form-control" rows="3" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-actions" id="personalInfoActions" style="display: none;">
+                                <button type="button" class="btn-secondary" id="cancelPersonalInfo">Batal</button>
+                                <button type="submit" class="btn-primary">Simpan Perubahan</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Academic Information -->
+                <section class="profile-section">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>Informasi Akademik</h3>
+                        </div>
+                        <div class="academic-info">
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Kelas</span>
+                                    <span class="info-value" id="academicClass">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Tahun Ajaran</span>
+                                    <span class="info-value" id="academicYear">2024/2025</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Wali Kelas</span>
+                                    <span class="info-value" id="homeroomTeacher">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Jurusan</span>
+                                    <span class="info-value" id="academicMajor">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Academic Statistics -->
+                <section class="profile-section">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>Statistik Akademik</h3>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-icon">📚</div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="statTotalTasks">0</span>
+                                    <span class="stat-label">Total Tugas</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">✅</div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="statCompletedTasks">0</span>
+                                    <span class="stat-label">Tugas Selesai</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">📊</div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="statAverageGrade">0</span>
+                                    <span class="stat-label">Rata-rata Nilai</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">🏆</div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="statClassRank">-</span>
+                                    <span class="stat-label">Peringkat Kelas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Account Security -->
+                <section class="profile-section">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>Keamanan Akun</h3>
+                        </div>
+                        <form id="passwordForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="currentPassword">Password Saat Ini</label>
+                                    <input type="password" id="currentPassword" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">Password Baru</label>
+                                    <input type="password" id="newPassword" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Konfirmasi Password Baru</label>
+                                    <input type="password" id="confirmPassword" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Ubah Password</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Preferences -->
+                <section class="profile-section">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>Preferensi</h3>
+                        </div>
+                        <div class="preferences">
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Notifikasi Email</h4>
+                                    <p>Terima pemberitahuan tentang tugas dan nilai melalui email</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="emailNotifications" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Pengingat Tugas</h4>
+                                    <p>Kirim pengingat untuk tugas yang mendekati batas waktu</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="taskReminders" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Laporan Mingguan</h4>
+                                    <p>Kirim laporan progress akademik mingguan</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="weeklyReports">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Danger Zone -->
+                <section class="profile-section">
+                    <div class="content-card danger-zone">
+                        <div class="card-header">
+                            <h3>Zona Berbahaya</h3>
+                        </div>
+                        <div class="danger-actions">
+                            <div class="danger-item">
+                                <div class="danger-info">
+                                    <h4>Hapus Akun</h4>
+                                    <p>Hapus akun Anda secara permanen. Tindakan ini tidak dapat dibatalkan.</p>
+                                </div>
+                                <button class="btn-danger" id="deleteAccountBtn">Hapus Akun</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Delete Account Confirmation Modal -->
+    <div id="deleteAccountModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Hapus Akun</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus akun Anda?</p>
+                <p class="warning-text">Tindakan ini akan menghapus semua data Anda secara permanen dan tidak dapat dibatalkan.</p>
+                <div class="confirmation-input">
+                    <label for="confirmDelete">Ketik "HAPUS" untuk konfirmasi:</label>
+                    <input type="text" id="confirmDelete" class="form-control" placeholder="HAPUS">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="cancelDelete">Batal</button>
+                <button class="btn-danger" id="confirmDeleteBtn" disabled>Hapus Akun Selamanya</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

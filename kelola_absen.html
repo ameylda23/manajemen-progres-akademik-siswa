@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Absensi Siswa</title>
+    <link rel="stylesheet" href="kelola_absen.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Logo</h1>
+            </div>
+        
+        </header>
+
+        
+            <main class="content">
+                <div class="content-header">
+                    <h2>Data Absensi Siswa</h2>
+                    <div class="actions">
+                        <button id="simpanBtn" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </div>
+
+                <div class="attendance-table-container">
+                    <table class="attendance-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Siswa</th>
+                                <th>Status Kehadiran</th>
+                            </tr>
+                        </thead>
+                        <tbody id="siswaTableBody">
+                            <!-- Data siswa akan diisi oleh JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="kelola_absen.js"></script>
+</body>
+</html>

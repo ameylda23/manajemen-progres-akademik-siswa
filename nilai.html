@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nilai Siswa - MyClassProgress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>MyClassProgress</h1>
+                <div class="user-info">
+                    <span id="userWelcome">Selamat datang!</span>
+                    <div class="user-menu">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="user-avatar">
+                        <span id="userName">Siswa</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="tugas.html" class="nav-link">Tugas</a>
+                <a href="nilai.html" class="nav-link active">Nilai</a>
+                <a href="profile.html" class="nav-link">Profil</a>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h2>Nilai Akademik</h2>
+                <p>Lihat progress nilai dan performa akademik Anda</p>
+            </div>
+
+            <!-- Overall Statistics -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <h3>Rata-rata Nilai</h3>
+                            <span class="stat-value" id="averageGrade">0</span>
+                            <span class="stat-label">/100</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-content">
+                            <h3>Nilai Tertinggi</h3>
+                            <span class="stat-value" id="highestGrade">0</span>
+                            <span class="stat-label">/100</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📉</div>
+                        <div class="stat-content">
+                            <h3>Nilai Terendah</h3>
+                            <span class="stat-value" id="lowestGrade">0</span>
+                            <span class="stat-label">/100</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-content">
+                            <h3>Peringkat Kelas</h3>
+                            <span class="stat-value" id="classRank">-</span>
+                            <span class="stat-label">dari 30 siswa</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="filterSubject">Filter Mata Pelajaran</label>
+                        <select id="filterSubject" class="form-control">
+                            <option value="">Semua Mata Pelajaran</option>
+                            <option value="Matematika">Matematika</option>
+                            <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                            <option value="Bahasa Inggris">Bahasa Inggris</option>
+                            <option value="IPA">IPA</option>
+                            <option value="IPS">IPS</option>
+                            <option value="Sejarah">Sejarah</option>
+                            <option value="Seni Budaya">Seni Budaya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterSemester">Filter Semester</label>
+                        <select id="filterSemester" class="form-control">
+                            <option value="">Semua Semester</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sortBy">Urutkan Berdasarkan</label>
+                        <select id="sortBy" class="form-control">
+                            <option value="date">Tanggal Terbaru</option>
+                            <option value="subject">Mata Pelajaran</option>
+                            <option value="grade">Nilai</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grades by Subject -->
+            <section class="subject-grades-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Rata-rata per Mata Pelajaran</h3>
+                    </div>
+                    <div class="subject-grades-grid" id="subjectGradesGrid">
+                        <div class="empty-state">
+                            <p>Belum ada nilai untuk ditampilkan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grades List -->
+            <section class="grades-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Detail Nilai</h3>
+                        <button id="exportGrades" class="btn-secondary">Export PDF</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="grades-table">
+                            <thead>
+                                <tr>
+                                    <th>Mata Pelajaran</th>
+                                    <th>Tugas</th>
+                                    <th>Nilai</th>
+                                    <th>Predikat</th>
+                                    <th>Tanggal</th>
+                                    <th>Catatan Guru</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gradesTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-state">
+                                        <p>Belum ada nilai yang tercatat</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grade Detail Modal -->
+            <div id="gradeDetailModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Detail Nilai</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="grade-detail-content">
+                        <div class="grade-detail-header">
+                            <h4 id="gradeDetailSubject">Mata Pelajaran</h4>
+                            <div class="grade-badge" id="gradeDetailBadge">
+                                <span class="grade-value" id="gradeDetailValue">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grade-detail-info">
+                            <div class="detail-item">
+                                <span class="detail-label">Tugas:</span>
+                                <span class="detail-value" id="gradeDetailTask">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Tanggal Dinilai:</span>
+                                <span class="detail-value" id="gradeDetailDate">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Predikat:</span>
+                                <span class="detail-value" id="gradeDetailPredicate">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Diberikan Oleh:</span>
+                                <span class="detail-value" id="gradeDetailTeacher">-</span>
+                            </div>
+                        </div>
+
+                        <div class="grade-detail-notes">
+                            <h5>Catatan Guru:</h5>
+                            <p id="gradeDetailNotes">Tidak ada catatan</p>
+                        </div>
+
+                        <div class="grade-detail-actions">
+                            <button class="btn-primary" id="closeGradeDetail">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Chart Section -->
+            <section class="progress-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Progress Nilai per Mata Pelajaran</h3>
+                    </div>
+                    <div class="progress-chart">
+                        <canvas id="gradesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance Summary -->
+            <section class="performance-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Ringkasan Performa</h3>
+                    </div>
+                    <div class="performance-summary">
+                        <div class="performance-item">
+                            <span class="performance-label">Total Tugas Dinilai:</span>
+                            <span class="performance-value" id="totalGradedTasks">0</span>
+                        </div>
+                        <div class="performance-item">
+                            <span class="performance-label">Tugas dengan Nilai A:</span>
+                            <span class="performance-value" id="gradeACount">0</span>
+                        </div>
+                        <div class="performance-item">
+                            <span class="performance-label">Tugas dengan Nilai B:</span>
+                            <span class="performance-value" id="gradeBCount">0</span>
+                        </div>
+                        <div class="performance-item">
+                            <span class="performance-label">Tugas dengan Nilai C:</span>
+                            <span class="performance-value" id="gradeCCount">0</span>
+                        </div>
+                        <div class="performance-item">
+                            <span class="performance-label">Perbaikan Perlu:</span>
+                            <span class="performance-value" id="improvementCount">0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

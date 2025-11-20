@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Guru - MyClassProgress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>MyClassProgress</h1>
+                <div class="user-info">
+                    <span id="userWelcome">Selamat datang, Guru!</span>
+                    <div class="user-menu">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="user-avatar">
+                        <span id="userName">Guru</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar">
+                <a href="guru.html" class="nav-link active">Dashboard</a>
+                <a href="guru_nilai.html" class="nav-link">Input Nilai</a>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <h2 id="greetingText">Selamat Pagi!</h2>
+                    <p id="dateDisplay">Senin, 15 Januari 2024</p>
+                    <div class="progress-summary">
+                        <div class="summary-item">
+                            <span class="summary-value" id="totalTugasDiberikan">0</span>
+                            <span class="summary-label">Tugas Diberikan</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-value" id="totalSiswa">0</span>
+                            <span class="summary-label">Total Siswa</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-value" id="tugasBelumDinilai">0</span>
+                            <span class="summary-label">Tugas Belum Dinilai</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="actions-section">
+                <div class="actions-grid">
+                    <div class="action-card" onclick="window.location.href='guru-nilai.html'">
+                        <a href="guru_nilai.html"><div class="action-icon">📝</div></a>
+                        <h3>Input Nilai</h3>
+                        <p>Berikan nilai untuk tugas siswa</p>
+                    </div>
+                    <div class="action-card" id="addTaskBtn">
+                        <div class="action-icon">➕</div>
+                        <h3>Tambah Tugas</h3>
+                        <p>Buat tugas baru untuk siswa</p>
+                    </div>
+                    <div class="action-card">
+                        <div class="action-icon">📊</div>
+                        <h3>Laporan Kelas</h3>
+                        <p>Lihat statistik performa kelas</p>
+                    </div>
+                    <div class="action-card">
+                        <a href="kelola_absen.html"><div class="action-icon">👥</div></a>
+                        <h3>Kelola Siswa</h3>
+                        <p>Kelola data siswa di kelas</p>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Task Modal -->
+            <div id="taskModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Tambah Tugas Baru</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <form id="taskForm">
+                        <div class="form-group">
+                            <label for="taskTitle">Judul Tugas</label>
+                            <input type="text" id="taskTitle" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskSubject">Mata Pelajaran</label>
+                            <select id="taskSubject" class="form-control" required>
+                                <option value="">Pilih Mata Pelajaran</option>
+                                <option value="Matematika">Matematika</option>
+                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                                <option value="Bahasa Inggris">Bahasa Inggris</option>
+                                <option value="IPA">IPA</option>
+                                <option value="IPS">IPS</option>
+                                <option value="Sejarah">Sejarah</option>
+                                <option value="Seni Budaya">Seni Budaya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDescription">Deskripsi Tugas</label>
+                            <textarea id="taskDescription" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDeadline">Batas Waktu</label>
+                            <input type="date" id="taskDeadline" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskClass">Kelas</label>
+                            <select id="taskClass" class="form-control" required>
+                                <option value="">Pilih Kelas</option>
+                                <option value="12 IPA 1">12 IPA 1</option>
+                                <option value="12 IPA 2">12 IPA 2</option>
+                                <option value="12 IPS 1">12 IPS 1</option>
+                                <option value="12 IPS 2">12 IPS 2</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="cancelTask">Batal</button>
+                            <button type="submit" class="btn-primary">Simpan Tugas</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recent Tasks -->
+            <section class="content-grid">
+                <!-- Tugas Terbaru Diberikan -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Tugas Terbaru Diberikan</h3>
+                    </div>
+                    <div class="task-list" id="recentGivenTasks">
+                        <div class="empty-state">
+                            <p>Belum ada tugas yang diberikan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tugas Perlu Dinilai -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Tugas Perlu Dinilai</h3>
+                        <a href="guru-nilai.html" class="view-all">Lihat Semua</a>
+                    </div>
+                    <div class="task-list" id="tasksToGrade">
+                        <div class="empty-state">
+                            <p>Tidak ada tugas yang perlu dinilai</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Student Performance -->
+            <section class="performance-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Performa Siswa Terbaik</h3>
+                    </div>
+                    <div class="performance-list" id="topStudents">
+                        <div class="empty-state">
+                            <p>Belum ada data performa siswa</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+
+    <script src="data.js"></script>
+    <script src="guru.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Tugas - MyClassProgress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>MyClassProgress</h1>
+                <div class="user-info">
+                    <span id="userWelcome">Selamat datang!</span>
+                    <div class="user-menu">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="user-avatar">
+                        <span id="userName">Siswa</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="tugas.html" class="nav-link active">Tugas</a>
+                <a href="nilai.html" class="nav-link">Nilai</a>
+                <a href="profile.html" class="nav-link">Profil</a>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h2>Daftar Tugas</h2>
+                <p>Kelola dan pantau semua tugas Anda</p>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="filterStatus">Filter Status</label>
+                        <select id="filterStatus" class="form-control">
+                            <option value="">Semua Status</option>
+                            <option value="belum">Belum Dikerjakan</option>
+                            <option value="progress">Dalam Pengerjaan</option>
+                            <option value="selesai">Selesai</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterSubject">Filter Mata Pelajaran</label>
+                        <select id="filterSubject" class="form-control">
+                            <option value="">Semua Mata Pelajaran</option>
+                            <option value="Matematika">Matematika</option>
+                            <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                            <option value="Bahasa Inggris">Bahasa Inggris</option>
+                            <option value="IPA">IPA</option>
+                            <option value="IPS">IPS</option>
+                            <option value="Sejarah">Sejarah</option>
+                            <option value="Seni Budaya">Seni Budaya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterDeadline">Filter Tenggat Waktu</label>
+                        <select id="filterDeadline" class="form-control">
+                            <option value="">Semua Tenggat</option>
+                            <option value="hari-ini">Hari Ini</option>
+                            <option value="minggu-ini">Minggu Ini</option>
+                            <option value="bulan-ini">Bulan Ini</option>
+                            <option value="terlambat">Terlambat</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sortBy">Urutkan Berdasarkan</label>
+                        <select id="sortBy" class="form-control">
+                            <option value="deadline">Tenggat Waktu</option>
+                            <option value="created">Tanggal Diberikan</option>
+                            <option value="subject">Mata Pelajaran</option>
+                            <option value="status">Status</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Statistics -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-content">
+                            <h3>Total Tugas</h3>
+                            <span class="stat-value" id="totalTasks">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <h3>Tugas Selesai</h3>
+                            <span class="stat-value" id="completedTasks">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-content">
+                            <h3>Batas Waktu Dekat</h3>
+                            <span class="stat-value" id="urgentTasks">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠</div>
+                        <div class="stat-content">
+                            <h3>Terlambat</h3>
+                            <span class="stat-value" id="overdueTasks">0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tasks List -->
+            <section class="tasks-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Daftar Tugas</h3>
+                        <div class="card-actions">
+                            <button id="markAllDone" class="btn-secondary">Tandai Semua Selesai</button>
+                        </div>
+                    </div>
+
+                    <div class="tasks-list" id="tasksList">
+                        <!-- Tasks will be loaded here -->
+                        <div class="empty-state">
+                            <p>Tidak ada tugas</p>
+                            <p class="empty-subtitle">Semua tugas telah selesai dikerjakan! 🎉</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Task Detail Modal -->
+            <div id="taskDetailModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Detail Tugas</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="task-detail-content">
+                        <div class="task-detail-header">
+                            <h4 id="taskDetailTitle">Judul Tugas</h4>
+                            <span class="task-status-badge" id="taskDetailStatus">Belum</span>
+                        </div>
+                        
+                        <div class="task-detail-info">
+                            <div class="detail-item">
+                                <span class="detail-label">Mata Pelajaran:</span>
+                                <span class="detail-value" id="taskDetailSubject">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Diberikan Oleh:</span>
+                                <span class="detail-value" id="taskDetailTeacher">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Tanggal Diberikan:</span>
+                                <span class="detail-value" id="taskDetailGivenDate">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Batas Waktu:</span>
+                                <span class="detail-value" id="taskDetailDeadline">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Prioritas:</span>
+                                <span class="detail-value" id="taskDetailPriority">-</span>
+                            </div>
+                        </div>
+
+                        <div class="task-detail-description">
+                            <h5>Deskripsi Tugas:</h5>
+                            <p id="taskDetailDescription">Tidak ada deskripsi</p>
+                        </div>
+
+                        <div class="task-detail-actions">
+                            <button class="btn-secondary" id="closeDetail">Tutup</button>
+                            <button class="btn-primary" id="toggleStatusBtn">Tandai sebagai Selesai</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Note Modal -->
+            <div id="noteModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Tambah Catatan Tugas</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <form id="noteForm">
+                        <div class="form-group">
+                            <label for="taskNote">Catatan Pribadi</label>
+                            <textarea id="taskNote" class="form-control" rows="4" placeholder="Tulis catatan atau progress pengerjaan tugas..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="cancelNote">Batal</button>
+                            <button type="submit" class="btn-primary">Simpan Catatan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

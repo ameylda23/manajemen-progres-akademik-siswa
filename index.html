@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MyClassProgress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>MyClassProgress</h1>
+                <div class="user-info">
+                    <span id="userWelcome">Selamat datang!</span>
+                    <div class="user-menu">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="user-avatar">
+                        <span id="userName">Siswa</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar">
+                <a href="index.html" class="nav-link active">Dashboard</a>
+                <a href="tugas.html" class="nav-link">Tugas</a>
+                <a href="nilai.html" class="nav-link">Nilai</a>
+                <a href="profile.html" class="nav-link">Profil</a>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <h2 id="greetingText">Selamat Pagi!</h2>
+                    <p id="dateDisplay">Senin, 15 Januari 2024</p>
+                    <div class="progress-summary">
+                        <div class="summary-item">
+                            <span class="summary-value" id="totalTasks">0</span>
+                            <span class="summary-label">Total Tugas</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-value" id="completedTasks">0</span>
+                            <span class="summary-label">Tugas Selesai</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-value" id="pendingTasks">0</span>
+                            <span class="summary-label">Tugas Tertunda</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Stats -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <h3>Rata-rata Nilai</h3>
+                            <span class="stat-value" id="averageGrade">0</span>
+                            <span class="stat-label">/100</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-content">
+                            <h3>Tugas Mendesak</h3>
+                            <span class="stat-value" id="urgentTasks">0</span>
+                            <span class="stat-label">dalam 3 hari</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-content">
+                            <h3>Mata Pelajaran</h3>
+                            <span class="stat-value" id="totalSubjects">0</span>
+                            <span class="stat-label">aktif</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-content">
+                            <h3>Peringkat</h3>
+                            <span class="stat-value" id="classRank">-</span>
+                            <span class="stat-label">dari 30 siswa</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Tasks & Grades -->
+            <section class="content-grid">
+                <!-- Tugas Terbaru -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Tugas Terbaru</h3>
+                        <a href="tugas.html" class="view-all">Lihat Semua</a>
+                    </div>
+                    <div class="task-list" id="recentTasks">
+                        <div class="empty-state">
+                            <p>Belum ada tugas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nilai Terbaru -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Nilai Terbaru</h3>
+                        <a href="nilai.html" class="view-all">Lihat Semua</a>
+                    </div>
+                    <div class="grade-list" id="recentGrades">
+                        <div class="empty-state">
+                            <p>Belum ada nilai</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Chart -->
+            <section class="progress-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Progress Belajar</h3>
+                    </div>
+                    <div class="progress-chart">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
